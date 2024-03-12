@@ -156,12 +156,12 @@ work_nodes = []
 node_ids = []
 id_map = {}
 core_range={}
-jid=os.environ['PBS_JOBID']
+jid=os.environ['SLURM_JOBID']
 cpath=os.environ['PWD']
 try:
-    nodef = open(os.environ['PBS_NODEFILE'])
-except KeyError:
-    sys.stderr.write('Error opening PBS_NODEFILE. Exiting.\n')
+    nodef = os.environ['SLURM_JOB_NODELIST']
+except:
+    sys.stderr.write('Error opening SLURM_JOB_NODELIST. Exiting.\n')
     sys.exit(2)
 id = 0
 cpt=cores_per_node/ppn
